@@ -1,4 +1,4 @@
-#"hola mundo"(print);a
+#"hola mundo"(print);ab
 
 
 archivo = "inventario.csv"
