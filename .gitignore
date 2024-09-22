@@ -9,6 +9,8 @@ build/
 env/
 venv/
 .venv/
+daymaVenv/
+.daymaVenv/
 ENV/
 env.bak/
 venv.bak/
