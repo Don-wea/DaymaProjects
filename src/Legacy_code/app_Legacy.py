@@ -1,5 +1,5 @@
 import flet as ft
-import Sistema_gestor_de_inventario_Legacy as inventario
+import src.Legacy_code.Sistema_gestor_de_inventario_Legacy as inventario
 
 def main(page: ft.Page):
     page.title = "Flet counter example"

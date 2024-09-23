@@ -2,6 +2,8 @@ import flet as ft
 from views.modules import get_module_content
 
 def main(page: ft.Page):
+
+    ft.AdaptiveControl=True
     # Function to switch between modules
     def switch_module(e):
         selected_module = e.control.data
