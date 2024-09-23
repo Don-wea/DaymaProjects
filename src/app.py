@@ -1,30 +1,30 @@
 import flet as ft
-import Sistema_gestor_de_inventario as inventario
+from views.main_view import main_view
+from views.inventory_view import inventory_view
+from views.sales_view import sales_view
 
 def main(page: ft.Page):
-    page.title = "Flet counter example"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.title = "Store Management System"
+    page.window_width = 1000
+    page.window_height = 600
+    page.theme_mode = ft.ThemeMode.LIGHT
 
-    txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
-
-    def minus_click(e):
-        txt_number.value = str(int(txt_number.value) - 1)
+    # Routing for different views
+    def route_change(route):
+        page.views.clear()
+        if page.route == "/":
+            page.views.append(ft.View("/", [main_view(page)]))
+        elif page.route == "/inventory":
+            page.views.append(ft.View("/inventory", [inventory_view(page)]))
+        elif page.route == "/sales":
+            page.views.append(ft.View("/sales", [sales_view(page)]))
         page.update()
 
-    def plus_click(e):
-        txt_number.value = str(int(txt_number.value) + 1)
-        inventario.AgregarProducto()
-        page.update()
+    # Set the route change handler
+    page.on_route_change = route_change
 
-    page.add(
-        ft.Row(
-            [
-                ft.IconButton(ft.icons.REMOVE, on_click=minus_click),
-                txt_number,
-                ft.IconButton(ft.icons.ADD, on_click=plus_click),
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-        )
-    )
+    # Start with the main view
+    page.go("/")
 
-ft.app(main)
+if __name__ == "__main__":
+    ft.app(target=main)
