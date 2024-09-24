@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./utils/venv.sh
+./scripts/venv.sh
 
 if [ -d ".venv" ]; then
     echo "venv creado con éxito."
