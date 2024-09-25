@@ -38,8 +38,12 @@ class ModuleInventory(ft.UserControl):
         products.append(product_data)
 
         # Write the updated product list back to the JSON file
-        with open(file_path, "w") as file:
+        with open(file_path, "w+") as file:
             json.dump(products, file, indent=4)
+            
+    def close_dialog(e, dialog):
+            dialog.open = False
+            e.page.update()  # Refresh the page to show the dialog
 
     # Function to handle the add new item button click
     def add_new_item(self, e):
@@ -48,6 +52,7 @@ class ModuleInventory(ft.UserControl):
         product_name_field = ft.TextField(label="Enter Product Name")
         category_field = ft.TextField(label="Enter Category")
         description_field = ft.TextField(label="Enter Description")
+
 
         # Create a dialog for user input
         dialog = ft.AlertDialog(
@@ -62,7 +67,7 @@ class ModuleInventory(ft.UserControl):
             ),
             actions=[
                 ft.TextButton("Submit", on_click=lambda _: self.save_and_confirm(product_id_field.value, product_name_field.value, category_field.value, description_field.value, dialog)),
-                ft.TextButton("Cancel", on_click=lambda _: dialog.close()),
+                ft.TextButton("Cancel", on_click=lambda _: self.close_dialog(dialog)),
             ],
         )
 
@@ -85,7 +90,7 @@ class ModuleInventory(ft.UserControl):
         self.save_product(new_product)
         
         # Show confirmation message
-        ft.snack_bar("New item added!", duration=2)
+        SnackbarController(self.page).show_snackbar("Item añadido yeiii yipi lol")
         
         # Close the dialog
-        dialog.close()
+        self.close_dialog(dialog)
