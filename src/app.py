@@ -1,4 +1,5 @@
 import flet as ft
+from components.header import create_header
 from views.modules import get_module_content
 from components.bottom_nav import create_bottom_nav
 
@@ -10,7 +11,9 @@ def main(page: ft.Page):
         selected_module = e.control.data
         content_area.content = get_module_content(selected_module, page)  # Pasar 'page' aquí
         content_area.update()
-
+    
+    header = create_header(page)
+    
     # Bottom navigation bar
     bottom_nav = create_bottom_nav(switch_module)
 
@@ -21,8 +24,15 @@ def main(page: ft.Page):
     mobile_layout = ft.Column(
         controls=[
             ft.Container(
+                content=header,
+                padding = ft.Padding(top=10,left=0,right=10,bottom=10),
+                bgcolor = ft.colors.BLUE,
+                border_radius = 100
+            ),
+            ft.Container(
                 content=content_area,
-                expand=True
+                expand=True,
+                padding = 20
             ),
             ft.Container(
                 content=bottom_nav,
@@ -32,7 +42,7 @@ def main(page: ft.Page):
         expand=True
     )
 
-    page.theme_mode = ft.ThemeMode.LIGHT
+    page.theme_mode = ft.ThemeMode.DARK
     page.add(mobile_layout)
 
 ft.app(target=main)

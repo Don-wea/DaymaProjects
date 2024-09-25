@@ -1,7 +1,7 @@
 import flet as ft
 import json
 import os
-from controllers.snackbar_controller import SnackbarController
+from controllers.snackbar_controller import SnackbarController as SBC
 
 
 class ModuleInventory(ft.UserControl):
@@ -12,11 +12,11 @@ class ModuleInventory(ft.UserControl):
     def build(self):
         return ft.Column(
             controls=[
-                ft.Text("Inventory Management", style="headlineLarge"),
-                ft.Text("Manage your stock, add new items, update existing items, or check stock levels."),
-                ft.ElevatedButton("Add New Item", on_click=self.add_new_item),
-                ft.ElevatedButton("Update Item", on_click=lambda _: ft.snack_bar("Item updated!")),
-                ft.ElevatedButton("Check Stock Levels", on_click=lambda _: ft.snack_bar("Current stock level is: X")),
+                ft.Text("Gestor de Inventario", style="headlineLarge"),
+                ft.Text("Apartado destinado a gestionar la base de datos.\nAquí puede modificar el stock y agregar items inexistentes"),
+                ft.ElevatedButton("Agregar Nuevo Item", on_click=self.add_new_item),
+                ft.ElevatedButton("Actualizar Item", on_click=lambda _: SBC(self.page).show_snackbar("Actualizando Item...")),
+                ft.ElevatedButton("Revisar stock", on_click=lambda _: SBC(self.page).show_snackbar("Revisando Stock...")),
             ]
         )
     
@@ -52,11 +52,10 @@ class ModuleInventory(ft.UserControl):
         product_name_field = ft.TextField(label="Enter Product Name")
         category_field = ft.TextField(label="Enter Category")
         description_field = ft.TextField(label="Enter Description")
-
-
+        
         # Create a dialog for user input
         dialog = ft.AlertDialog(
-            title=ft.Text("Add New Item"),  # Corrected: title should be a Text control
+            title=ft.Text("Agregando Nuevo Item"),  # Corrected: title should be a Text control
             content=ft.Column(
                 controls=[
                     product_id_field,
@@ -90,7 +89,7 @@ class ModuleInventory(ft.UserControl):
         self.save_product(new_product)
         
         # Show confirmation message
-        SnackbarController(self.page).show_snackbar("Item añadido yeiii yipi lol")
+        SBC(self.page).show_snackbar("Item añadido yeiii yipi lol")
         
         # Close the dialog
         self.close_dialog(dialog)
