@@ -30,7 +30,7 @@ class Database:
             id_venta INTEGER PRIMARY KEY,
             fecha DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
             medio VARCHAR(20) NOT NULL,
-            valor_final INTEGER NOT NULL,
+            valor_final INTEGER NOT NULL
         )''')
         
         self.cursor.execute('''
@@ -39,7 +39,7 @@ class Database:
             id_venta INTEGER,
             cantidad INTEGER NOT NULL,
             FOREIGN KEY (id_producto) REFERENCES Producto(id_producto),
-            FOREIGN KEY (id_venta) REFERENCES Venta(id_venta)
+            FOREIGN KEY (id_venta) REFERENCES Venta(id_venta),
             PRIMARY KEY (id_producto, id_venta)
         )''')
         
@@ -51,6 +51,30 @@ class Database:
         
     def get_products(self):
         self.cursor.execute('SELECT * FROM Producto')
+        return self.cursor.fetchall()
+    
+    def insert_inventory(self, cantidad, id_producto):
+        self.cursor.execute('INSERT INTO Inventario(cantidad, id_producto) VALUES (?,?)', (cantidad, id_producto))
+        self.conn.commit()
+        
+    def get_inventory(self):
+        self.cursor.execute('SELECT * FROM Inventario')
+        return self.cursor.fetchall()
+    
+    def insert_sale(self, fecha, medio, valor_final):
+        self.cursor.execute('INSERT INTO Venta(fecha, medio, valor_final) VALUES (?,?,?)', (fecha, medio, valor_final))
+        self.conn.commit()
+        
+    def get_sales(self):
+        self.cursor.execute('SELECT * FROM Venta')
+        return self.cursor.fetchall()
+    
+    def insert_product_sale(self, id_producto, id_venta, cantidad):
+        self.cursor.execute('INSERT INTO Producto_Venta(id_producto, id_venta, cantidad) VALUES (?,?,?)', (id_producto, id_venta, cantidad))
+        self.conn.commit()
+        
+    def get_product_sales(self):
+        self.cursor.execute('SELECT * FROM Producto_Venta')
         return self.cursor.fetchall()
     
     def close(self):
