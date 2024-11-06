@@ -1,20 +1,20 @@
-# <img src="assets/img/logo2.png" alt="dayma logo" width="64"/>Sistema Gestor de Inventario DaymaProjects
+# <img src="assets/img/logo2.png" alt="dayma logo" width="64"/> Sistema Gestor de Inventario DaymaProjects
 
 Sistema Gestor de Inventario DaymaProjects is a project that will help small stores to manage their sales and items.
 
-## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/>Prerequisites
+## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/> Prerequisites
 
 1. python
 2. pip
 
 * both `flet` and `pandas` are requirements that can be installed easily following the Installation instructions below
 
-## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/>Installation
+## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/> Installation
 
 ### Linux
 ```bash
-chmod +x utils/setup.sh
-./utils/setup.sh
+chmod +x scripts/setup.sh
+./scripts/setup.sh
 ```
 
 ### Windows
@@ -23,12 +23,12 @@ pip install flet
 pip install pandas
 ```
 
-## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/>Execution
+## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/> Execution
 
 ### Linux
 ```bash
-chmod +x run.sh
-./run.sh
+chmod +x scripts/run.sh
+./scripts/run.sh
 ```
 
 ### windows
@@ -36,6 +36,6 @@ chmod +x run.sh
 run.bat
 ```
 
-## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/>Collaborate
+## <img src="assets/img/logo2.png" alt="dayma logo" width="64"/> Collaborate
 
 contact Podlech
