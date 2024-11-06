@@ -10,7 +10,7 @@ class Database:
 
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS Producto (
-            id_producto INTEGER PRIMARY KEY,
+            id_producto INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT NOT NULL,
             precio INTEGER NOT NULL,
             categoria TEXT,
@@ -19,7 +19,7 @@ class Database:
         
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS Inventario (
-            id_inventario INTEGER PRIMARY KEY,
+            id_inventario INTEGER PRIMARY KEY AUTOINCREMENT,
             cantidad INTEGER NOT NULL,
             id_producto INTEGER,
             FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
@@ -27,7 +27,7 @@ class Database:
         
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS Venta (
-            id_venta INTEGER PRIMARY KEY,
+            id_venta INTEGER PRIMARY KEY AUTOINCREMENT,
             fecha DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
             medio VARCHAR(20) NOT NULL,
             valor_final INTEGER NOT NULL
