@@ -1,6 +1,6 @@
 import flet as ft
 
-version = "1.00"
+version = "0.10"
 
 def create_header(page):
     return ft.Row(
