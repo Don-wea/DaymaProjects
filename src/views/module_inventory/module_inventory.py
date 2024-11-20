@@ -16,9 +16,23 @@ class ModuleInventory(ft.UserControl):
                 ft.Text("Apartado destinado a gestionar la base de datos.\nAquí puede modificar el stock y agregar items inexistentes"),
                 ft.ElevatedButton("Agregar Nuevo Item", on_click=self.add_new_item),
                 ft.ElevatedButton("Actualizar Item", on_click=lambda _: SBC(self.page).show_snackbar("Actualizando Item...")),
-                ft.ElevatedButton("Revisar stock", on_click=lambda _: SBC(self.page).show_snackbar("Revisando Stock...")),
+                ft.ElevatedButton("Revisar stock", on_click=self.check_inventory),
             ]
         )
+    
+    
+    # HAY que combinar estas 2 funciones para que load_products sea llamada por save_products de manera elegante
+    
+    def load_products(self):
+        # Define the JSON file path
+        file_path = "data/items/products.json"
+        
+        # Check if the file already exists
+        if os.path.exists(file_path):
+            # Read existing data
+            with open(file_path, "r") as file:
+                products = json.load(file)
+                return products
     
     
     # Function to save the new product information to a JSON file
@@ -34,12 +48,22 @@ class ModuleInventory(ft.UserControl):
         else:
             products = []
 
-        # Append the new product
-        products.append(product_data)
+        #Check verifica si el producto a ingresar esta o no en el .json
+        check = False
+        for product in products:
+            if(product_data['id'] == product['id']):
+                print("EXISTE")
+                check = True
+                break
+
+        if (check == False): 
+            products.append(product_data)
 
         # Write the updated product list back to the JSON file
         with open(file_path, "w+") as file:
             json.dump(products, file, indent=4)
+            
+        return check
             
     def close_dialog(e, dialog):
             dialog.open = False
@@ -86,10 +110,44 @@ class ModuleInventory(ft.UserControl):
         }
 
         # Save the product to a JSON file
-        self.save_product(new_product)
+        check = self.save_product(new_product)
         
-        # Show confirmation message
-        SBC(self.page).show_snackbar("Item añadido yeiii yipi lol")
+        if (check == True):  
+            SBC(self.page).show_snackbar(f"El producto con ID: {new_product['id']} ya existe")
+        else:
+            SBC(self.page).show_snackbar("Se ha agregado el nuevo item")
         
         # Close the dialog
         self.close_dialog(dialog)
+
+
+
+
+    
+
+
+    def check_inventory(self, e):
+        
+        SBC(self.page).show_snackbar("Revisando Stock...")
+        
+        products = self.load_products()
+        
+        product_list = [
+            ft.ListTile(
+                title = ft.Text(f"{product['name']}")
+                
+            )
+            for product in products
+        ]
+        
+        
+        dialog_content = ft.Column(product_list, scroll=ft.ScrollMode.AUTO) 
+        dialog = ft.AlertDialog(
+                title = ft.Text("Lista de productos"),
+                content = dialog_content
+            )
+            # Show the dialog
+        e.page.dialog = dialog  # Use the 'dialog' property to open it
+        dialog.open = True
+        e.page.update()  # Refresh the page to show the dialog
+        

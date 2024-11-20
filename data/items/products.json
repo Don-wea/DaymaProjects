@@ -46,5 +46,71 @@
         "name": "asd",
         "category": "zx",
         "description": "dasdasd"
+    },
+    {
+        "id": 132,
+        "name": "Algo",
+        "category": "Cosmetico",
+        "description": "Perfume Da Perfume"
+    },
+    {
+        "id": 120,
+        "name": "asd",
+        "category": "123",
+        "description": "zxc"
+    },
+    {
+        "id": 123,
+        "name": "qweas",
+        "category": "dsd",
+        "description": "a"
+    },
+    {
+        "id": 1,
+        "name": "2",
+        "category": "3",
+        "description": "4"
+    },
+    {
+        "id": 1,
+        "name": "",
+        "category": "",
+        "description": ""
+    },
+    {
+        "id": 1,
+        "name": "",
+        "category": "",
+        "description": ""
+    },
+    {
+        "id": 1,
+        "name": "",
+        "category": "",
+        "description": ""
+    },
+    {
+        "id": 1,
+        "name": "",
+        "category": "",
+        "description": ""
+    },
+    {
+        "id": 1,
+        "name": "",
+        "category": "",
+        "description": ""
+    },
+    {
+        "id": 2,
+        "name": "",
+        "category": "",
+        "description": ""
+    },
+    {
+        "id": 101,
+        "name": "La cosa",
+        "category": "xa",
+        "description": "zx"
     }
 ]
