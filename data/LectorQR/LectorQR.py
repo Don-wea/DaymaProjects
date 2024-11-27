@@ -46,7 +46,7 @@ def main(page: ft.Page):
     page.add(
         ft.Column(
             [
-                ft.Text("Lector de QR y Códigos de Barras", size=30, weight="bold"),
+                ft.Text("Lector de QR y Códigos de Barras", size=30, weight="bold", text_align="center"),
                 scan_button,
                 result_text,
             ],
